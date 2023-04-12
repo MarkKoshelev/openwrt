@@ -1181,6 +1181,30 @@ define Device/mercusys_mr70x-v1
 endef
 TARGET_DEVICES += mercusys_mr70x-v1
 
+define Device/beeline_sbtplus
+  $(Device/dsa-migration)
+  $(Device/uimage-lzma-loader)
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_SIZE := 4096k
+  IMAGE_SIZE := 40960k
+  UBINIZE_OPTS := -E 5
+  SERCOMM_HWID := CHJ
+  SERCOMM_HWVER := A001
+  SERCOMM_SWVER := 0x0052
+  IMAGES += factory.img kernel.bin rootfs.bin
+  IMAGE/factory.img := pad-extra 1024k | append-kernel | pad-to 6144k | \
+        append-ubi | pad-to $$$$(BLOCKSIZE) | sercom-footer | pad-to 128 | \
+        zip $$$$(DEVICE_MODEL).bin | sercom-seal
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+  IMAGE/kernel.bin := append-kernel
+  IMAGE/rootfs.bin := append-ubi | check-size
+  DEVICE_TITLE := Beeline SmartBox Turbo+
+  DEVICE_PACKAGES := \
+        kmod-mt7603 kmod-mt7615e kmod-mt7615-firmware kmod-usb3 kmod-usb-ledtrig-usbport
+endef
+TARGET_DEVICES += beeline_sbtplus
+
 define Device/MikroTik
   $(Device/dsa-migration)
   DEVICE_VENDOR := MikroTik
