@@ -1,0 +1,12 @@
+--- a/deps/v8/src/execution/clobber-registers.cc
++++ b/deps/v8/src/execution/clobber-registers.cc
+@@ -53,7 +53,7 @@
+ #define CLOBBER_REGISTER(R) __asm__ volatile("movgr2fr.d $" #R ",$zero" :::);
+
+ #elif V8_HOST_ARCH_MIPS && V8_TARGET_ARCH_MIPS
+-#define CLOBBER_USE_REGISTER(R) __asm__ volatile("mtc1 $zero,$" #R :::);
++//#define CLOBBER_USE_REGISTER(R) __asm__ volatile("mtc1 $zero,$" #R :::);
+
+ #elif V8_HOST_ARCH_MIPS64 && V8_TARGET_ARCH_MIPS64
+ #define CLOBBER_USE_REGISTER(R) __asm__ volatile("dmtc1 $zero,$" #R :::);
+ 

@@ -28,6 +28,11 @@ config KERNEL_SWAP
 	bool "Support for paging of anonymous memory (swap)"
 	default y if !SMALL_FLASH
 
+config KERNEL_MIPS_FPU_EMULATOR
+        bool "Compile the kernel with MIPS FPU Emulator"
+        default y if TARGET_pistachio
+        depends on (mips || mipsel || mips64 || mips64el)
+
 config KERNEL_PROC_STRIPPED
 	bool "Strip non-essential /proc functionality to reduce code size"
 	default y if SMALL_FLASH

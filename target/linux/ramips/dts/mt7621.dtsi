@@ -11,6 +11,8 @@
 
 	aliases {
 		serial0 = &uartlite;
+		serial1 = &uartlite2;
+		serial2 = &uartlite3;
 	};
 
 	cpus {
@@ -155,7 +157,7 @@
 			no-loopback-test;
 		};
 
-		uartlite2: uartlite2@d00 {
+		uartlite2: uart2@d00 {
 			compatible = "ns16550a";
 			reg = <0xd00 0x100>;
 
@@ -173,7 +175,7 @@
 			status = "disabled";
 		};
 
-		uartlite3: uartlite3@e00 {
+		uartlite3: uart3@e00 {
 			compatible = "ns16550a";
 			reg = <0xe00 0x100>;
 
@@ -185,10 +187,13 @@
 			reg-shift = <2>;
 			reg-io-width = <4>;
 
+			no-loopback-test;
+			current-speed = <115200>;
+
 			pinctrl-names = "default";
 			pinctrl-0 = <&uart3_pins>;
 
-			status = "disabled";
+			status = "okay";
 		};
 
 		spi0: spi@b00 {
@@ -240,7 +245,7 @@
 			#dma-channels = <1>;
 			#dma-requests = <1>;
 
-			status = "disabled";
+			status = "okay";
 		};
 	};
 
