@@ -19,7 +19,8 @@ git clone https://github.com/openwrt/openwrt.git
 git clone https://github.com/MarkKoshelev/openwrt.git
 !!! замечено что если каталог с точками,  например openwrt.my то не собирается инсталлятор node
 git checkout openwrt-22.03
-
+на основе тега v22.03.3 
+git checkout v22.03.3.beeline
 
 ### obtain all the latest package definitions defined in feeds.conf / feeds.conf.default
 ./scripts/feeds update -a 
