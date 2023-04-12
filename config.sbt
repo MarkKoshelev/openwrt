@@ -51,7 +51,7 @@ CONFIG_TARGET_ramips_mt7621=y
 # CONFIG_TARGET_ramips_rt305x is not set
 # CONFIG_TARGET_ramips_rt3883 is not set
 # CONFIG_TARGET_MULTI_PROFILE is not set
-CONFIG_TARGET_ramips_mt7621_DEVICE_adslr_g7=y
+# CONFIG_TARGET_ramips_mt7621_DEVICE_adslr_g7 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_afoundry_ew1200 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_alfa-network_quad-e4g is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_ampedwireless_ally-r1900k is not set
@@ -71,7 +71,6 @@ CONFIG_TARGET_ramips_mt7621_DEVICE_adslr_g7=y
 # CONFIG_TARGET_ramips_mt7621_DEVICE_cudy_wr1300 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_cudy_wr2100 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_cudy_x6 is not set
-# CONFIG_TARGET_ramips_mt7621_DEVICE_dlink_dap-x1860-a1 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_dlink_dir-1960-a1 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_dlink_dir-2640-a1 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_dlink_dir-2660-a1 is not set
@@ -138,8 +137,7 @@ CONFIG_TARGET_ramips_mt7621_DEVICE_adslr_g7=y
 # CONFIG_TARGET_ramips_mt7621_DEVICE_linksys_re6500 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_mediatek_ap-mt7621a-v60 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_mediatek_mt7621-eval-board is not set
-# CONFIG_TARGET_ramips_mt7621_DEVICE_mercusys_mr70x-v1 is not set
-# CONFIG_TARGET_ramips_mt7621_DEVICE_beeline_sbtplus is not set
+CONFIG_TARGET_ramips_mt7621_DEVICE_beeline_sbtplus=y
 # CONFIG_TARGET_ramips_mt7621_DEVICE_mikrotik_routerboard-750gr3 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_mikrotik_routerboard-760igs is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_mikrotik_routerboard-m11g is not set
@@ -176,7 +174,6 @@ CONFIG_TARGET_ramips_mt7621_DEVICE_adslr_g7=y
 # CONFIG_TARGET_ramips_mt7621_DEVICE_thunder_timecloud is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_totolink_a7000r is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_totolink_x5000r is not set
-# CONFIG_TARGET_ramips_mt7621_DEVICE_tplink_archer-ax23-v1 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_tplink_archer-a6-v3 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_tplink_archer-c6-v3 is not set
 # CONFIG_TARGET_ramips_mt7621_DEVICE_tplink_archer-c6u-v1 is not set
@@ -233,7 +230,7 @@ CONFIG_HAS_SUBTARGETS=y
 CONFIG_HAS_DEVICES=y
 CONFIG_TARGET_BOARD="ramips"
 CONFIG_TARGET_SUBTARGET="mt7621"
-CONFIG_TARGET_PROFILE="DEVICE_adslr_g7"
+CONFIG_TARGET_PROFILE="DEVICE_beeline_sbtplus"
 CONFIG_TARGET_ARCH_PACKAGES="mipsel_24kc"
 CONFIG_DEFAULT_TARGET_OPTIMIZATION="-Os -pipe -mno-branch-likely -mips32r2 -mtune=24kc"
 CONFIG_CPU_TYPE="24kc"
@@ -248,9 +245,12 @@ CONFIG_DEFAULT_fstools=y
 CONFIG_DEFAULT_iwinfo=y
 CONFIG_DEFAULT_kmod-gpio-button-hotplug=y
 CONFIG_DEFAULT_kmod-leds-gpio=y
+CONFIG_DEFAULT_kmod-mt7603=y
 CONFIG_DEFAULT_kmod-mt7615-firmware=y
 CONFIG_DEFAULT_kmod-mt7615e=y
 CONFIG_DEFAULT_kmod-nft-offload=y
+CONFIG_DEFAULT_kmod-usb-ledtrig-usbport=y
+CONFIG_DEFAULT_kmod-usb3=y
 CONFIG_DEFAULT_libc=y
 CONFIG_DEFAULT_libgcc=y
 CONFIG_DEFAULT_libustream-wolfssl=y
@@ -2069,6 +2069,10 @@ CONFIG_PACKAGE_wireless-regdb=y
 # end of Fonts
 
 #
+# Kernel
+#
+
+#
 # Kernel modules
 #
 
@@ -3085,8 +3089,8 @@ CONFIG_PACKAGE_node=m
 # CONFIG_NODEJS_14 is not set
 # CONFIG_NODEJS_16 is not set
 CONFIG_NODEJS_18=y
-CONFIG_NODEJS_ICU_NONE=y
-# CONFIG_NODEJS_ICU_SMALL is not set
+# CONFIG_NODEJS_ICU_NONE is not set
+CONFIG_NODEJS_ICU_SMALL=y
 # CONFIG_NODEJS_NPM_KEEP_CACHE is not set
 CONFIG_NODEJS_NPM_CACHE_DIR=""
 # end of Configuration
@@ -3113,7 +3117,7 @@ CONFIG_NODEJS_NPM_CACHE_DIR=""
 # CONFIG_PACKAGE_node-bleno is not set
 # CONFIG_PACKAGE_node-bluetooth-hci-socket is not set
 # CONFIG_PACKAGE_node-browserify is not set
-# CONFIG_PACKAGE_node-bufferutil is not set
+CONFIG_PACKAGE_node-bufferutil=m
 # CONFIG_PACKAGE_node-classic-level is not set
 # CONFIG_PACKAGE_node-clean-modules is not set
 # CONFIG_PACKAGE_node-coap is not set
@@ -3206,11 +3210,11 @@ CONFIG_NODEJS_NPM_CACHE_DIR=""
 # CONFIG_PACKAGE_node-ubus is not set
 # CONFIG_PACKAGE_node-uglify-js is not set
 # CONFIG_PACKAGE_node-usb is not set
-# CONFIG_PACKAGE_node-utf-8-validate is not set
+CONFIG_PACKAGE_node-utf-8-validate=m
 # CONFIG_PACKAGE_node-websocket is not set
 # CONFIG_PACKAGE_node-ws is not set
 # CONFIG_PACKAGE_node-yarn is not set
-# CONFIG_PACKAGE_node-zigbee2mqtt is not set
+CONFIG_PACKAGE_node-zigbee2mqtt=m
 # CONFIG_PACKAGE_node-zwave-js is not set
 # CONFIG_PACKAGE_ts-node is not set
 # end of Node.js
@@ -4689,11 +4693,9 @@ CONFIG_PACKAGE_luci-mod-system=y
 CONFIG_PACKAGE_luci-app-adblock=y
 # CONFIG_PACKAGE_luci-app-advanced-reboot is not set
 # CONFIG_PACKAGE_luci-app-ahcp is not set
-# CONFIG_PACKAGE_luci-app-apinger is not set
 # CONFIG_PACKAGE_luci-app-aria2 is not set
 # CONFIG_PACKAGE_luci-app-attendedsysupgrade is not set
 # CONFIG_PACKAGE_luci-app-babeld is not set
-# CONFIG_PACKAGE_luci-app-banip is not set
 # CONFIG_PACKAGE_luci-app-bcp38 is not set
 # CONFIG_PACKAGE_luci-app-bird1-ipv4 is not set
 # CONFIG_PACKAGE_luci-app-bird1-ipv6 is not set
@@ -4777,7 +4779,6 @@ CONFIG_PACKAGE_luci-app-watchcat=y
 # CONFIG_PACKAGE_luci-app-wifischedule is not set
 CONFIG_PACKAGE_luci-app-wireguard=y
 # CONFIG_PACKAGE_luci-app-wol is not set
-# CONFIG_PACKAGE_luci-app-xfrpc is not set
 # CONFIG_PACKAGE_luci-app-xinetd is not set
 # CONFIG_PACKAGE_luci-app-yggdrasil is not set
 # end of 3. Applications
@@ -5342,6 +5343,7 @@ CONFIG_PACKAGE_luci-i18n-wireguard-ru=y
 #
 # Cloud Manager
 #
+# CONFIG_PACKAGE_cloudreve is not set
 # CONFIG_PACKAGE_rclone-ng is not set
 # CONFIG_PACKAGE_rclone-webui-react is not set
 # end of Cloud Manager
@@ -6017,7 +6019,6 @@ CONFIG_PACKAGE_uhttpd-mod-ubus=y
 # CONFIG_PACKAGE_uhttpd-mod-ucode is not set
 # CONFIG_PACKAGE_uwsgi is not set
 # CONFIG_PACKAGE_v2raya is not set
-# CONFIG_PACKAGE_xfrpc is not set
 # end of Web Servers/Proxies
 
 #
@@ -6109,14 +6110,12 @@ CONFIG_PACKAGE_adblock=y
 # CONFIG_PACKAGE_atlas-probe is not set
 # CONFIG_PACKAGE_atlas-sw-probe is not set
 # CONFIG_PACKAGE_atlas-sw-probe-rpc is not set
-# CONFIG_PACKAGE_banip is not set
 # CONFIG_PACKAGE_batctl-default is not set
 # CONFIG_PACKAGE_batctl-full is not set
 # CONFIG_PACKAGE_batctl-tiny is not set
 # CONFIG_PACKAGE_beanstalkd is not set
 # CONFIG_PACKAGE_bmon is not set
 # CONFIG_PACKAGE_boinc is not set
-# CONFIG_PACKAGE_boinc-wrapper is not set
 # CONFIG_PACKAGE_bpftool-full is not set
 # CONFIG_PACKAGE_bpftool-minimal is not set
 # CONFIG_PACKAGE_bwm-ng is not set
@@ -6127,7 +6126,6 @@ CONFIG_PACKAGE_chat=y
 # CONFIG_PACKAGE_coap-server is not set
 # CONFIG_PACKAGE_conserver is not set
 # CONFIG_PACKAGE_crowdsec is not set
-# CONFIG_PACKAGE_crowdsec-firewall-bouncer is not set
 # CONFIG_PACKAGE_cshark is not set
 # CONFIG_PACKAGE_daemonlogger is not set
 # CONFIG_PACKAGE_darkstat is not set
