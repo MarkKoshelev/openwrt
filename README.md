@@ -11,6 +11,57 @@ full customization, to use the device in ways never envisioned.
 
 Sunshine!
 
+## beeline sbt
+
+Сборка openwrt beeline sbt & node.js
+
+git clone https://github.com/openwrt/openwrt.git
+git clone https://github.com/MarkKoshelev/openwrt.git
+!!! замечено что если каталог с точками,  например openwrt.my то не собирается инсталлятор node
+git checkout openwrt-22.03
+
+
+### obtain all the latest package definitions defined in feeds.conf / feeds.conf.default
+./scripts/feeds update -a 
+### install symlinks for all obtained packages into package/feeds/
+./scripts/feeds install -a 
+
+
+Устанавливаем node.js
+https://forum.openwrt.org/t/howto-setup-zigbee2mqtt-on-openwrt/31856
+
+Добавляем пакет node
+
+nano feeds.conf.default
+src-git node https://github.com/nxhack/openwrt-node-packages.git
+
+./scripts/feeds update node
+
+Без этой магии будет ошибка menuconfig
+
+rm ./package/feeds/packages/node
+rm ./package/feeds/packages/node-*
+
+Не обращать внимания на ошибки:
+./scripts/feeds install -a -p node
+
+cкопировать два патча для node (выключают использование FPU)
+cp 999-* feeds/node/node/patches/v18.x/
+
+добавить поддержку KERNEL_MIPS_FPU_EMULATOR в node.js v18.03 
+nano feeds/node/node/Makefile
+<   DEPENDS:=@HAS_FPU @(i386||x86_64||arm||aarch64||mipsel) \
+---
+>   DEPENDS:=@(HAS_FPU||KERNEL_MIPS_FPU_EMULATOR) @(i386||x86_64||arm||aarch64||mipsel) \
+
+cp config.sbt .config
+make menuconfig
+
+make -j32
+!!!! многопоточная сборка часто заканчивается ошибкой, нужно несколько раз попробовать перезапустить сборку
+make -j32 V=sc
+make kernel_menuconfig
+
 ## Development
 
 To build your own firmware you need a GNU/Linux, BSD or MacOSX system (case
